@@ -1,6 +1,6 @@
 package utils
 
-import "github.com/aliyun/alibaba-cloud-sdk-go/sdk/log"
+import "log"
 
 func CheckError(err error) {
 	if err != nil {

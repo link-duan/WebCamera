@@ -1,0 +1,10 @@
+hash: 90fda0ff1d257b52d0c9db1e957677dfb7783206f73d3b549e7d42e1828e23ef
+updated: 2018-09-08T10:53:09.783890323+08:00
+imports:
+- name: github.com/Go-zh/net
+  version: 8e20723732c4db5309b9dd58fe49ce5221776045
+  subpackages:
+  - websocket
+- name: gocv.io/x/gocv
+  version: 116580adca5ee7dbf8d1307c9072f5094051116f
+testImports: []
