@@ -15,6 +15,7 @@ func init() {
 	videoCapture, err = gocv.OpenVideoCapture("/dev/video0")
 	utils.CheckError(err)
 	videoCapture.Set(gocv.VideoCaptureFrameWidth, 200)
+	videoCapture.Set(gocv.VideoCaptureFrameWidth, 150)
 	videoCapture.Set(gocv.VideoCaptureBufferSize, 1)
 	videoCapture.Set(gocv.VideoCaptureFPS, 30)
 }
@@ -33,11 +34,7 @@ func VideoStreamWS(ws *websocket.Conn) {
 			break
 		}
 
-		gocv.Resize(image, &image, image2.Point{200, 150}, 0, 0, gocv.InterpolationDefault)
-		
-		//gocv.CvtColor(image, &image, gocv.ColorRGBToGray)
-
-		//gocv.Threshold(image, &image, 75, 255, gocv.ThresholdBinary)
+		gocv.Resize(image, &image, image2.Point{400, 300}, 0, 0, gocv.InterpolationDefault)
 
 		encodedImage, err = gocv.IMEncode(".jpg", image)
 
