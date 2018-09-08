@@ -5,6 +5,7 @@ import (
 	"gocv.io/x/gocv"
 	"github.com/yaphper/WebCamera/app/utils"
 	"log"
+	image2 "image"
 )
 
 var videoCapture *gocv.VideoCapture
@@ -32,6 +33,8 @@ func VideoStreamWS(ws *websocket.Conn) {
 			break
 		}
 
+		gocv.Resize(image, &image, image2.Point{200, 150}, 0, 0, gocv.InterpolationDefault)
+		
 		//gocv.CvtColor(image, &image, gocv.ColorRGBToGray)
 
 		//gocv.Threshold(image, &image, 75, 255, gocv.ThresholdBinary)
