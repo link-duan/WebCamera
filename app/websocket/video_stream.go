@@ -32,7 +32,7 @@ func VideoStreamWS(ws *websocket.Conn) {
 			break
 		}
 
-		gocv.CvtColor(image, &image, gocv.ColorRGBToGray)
+		//gocv.CvtColor(image, &image, gocv.ColorRGBToGray)
 
 		//gocv.Threshold(image, &image, 75, 255, gocv.ThresholdBinary)
 
