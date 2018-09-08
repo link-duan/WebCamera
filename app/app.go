@@ -14,5 +14,5 @@ func init() {
 
 func StartServer() error {
 
-	return http.ListenAndServe(":9808", nil)
+	return http.ListenAndServe("0.0.0.0:9808", nil)
 }
