@@ -18,10 +18,10 @@ import (
 )
 
 const (
-	VideoCompressQuality = 40
+	VideoCompressQuality = 60
 	VideoWidth           = 320
 	VideoHeight          = 240
-	VideoFPS             = 21
+	VideoFPS             = 16
 )
 
 type User struct {
