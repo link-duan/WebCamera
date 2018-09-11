@@ -1,7 +1,7 @@
 package websocket
 
 import (
-	"golang.org/x/net/websocket"
+	"github.com/Go-zh/net/websocket"
 )
 
 func response(ws *websocket.Conn, option string, message string) error {

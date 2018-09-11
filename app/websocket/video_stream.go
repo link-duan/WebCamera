@@ -1,7 +1,6 @@
 package websocket
 
 import (
-	"golang.org/x/net/websocket"
 	"gocv.io/x/gocv"
 	"github.com/yaphper/WebCamera/app/utils"
 	"log"
@@ -14,6 +13,7 @@ import (
 	"runtime"
 	"encoding/json"
 	"strings"
+	"github.com/Go-zh/net/websocket"
 )
 
 const (

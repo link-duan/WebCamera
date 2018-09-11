@@ -3,7 +3,7 @@ package app
 import (
 	"net/http"
 	SocketServices "github.com/yaphper/WebCamera/app/websocket"
-	"golang.org/x/net/websocket"
+	"github.com/Go-zh/net/websocket"
 )
 
 func init() {

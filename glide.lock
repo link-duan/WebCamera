@@ -1,10 +1,10 @@
 hash: 487b763641860e0be793709bab1989011b4ae9173e1b42c5fe95edcb4cd52dc1
-updated: 2018-09-11T14:46:43.327380048+08:00
+updated: 2018-09-11T15:19:19.786436235+08:00
 imports:
-- name: gocv.io/x/gocv
-  version: 116580adca5ee7dbf8d1307c9072f5094051116f
-- name: golang.org/x/net
-  version: 161cd47e91fd58ac17490ef4d742dc98bb4cf60e
+- name: github.com/Go-zh/net
+  version: 8e20723732c4db5309b9dd58fe49ce5221776045
   subpackages:
   - websocket
+- name: gocv.io/x/gocv
+  version: 116580adca5ee7dbf8d1307c9072f5094051116f
 testImports: []
