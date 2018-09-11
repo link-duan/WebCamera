@@ -1,7 +1,4 @@
 package: github.com/yaphper/WebCamera
 import:
-- package: github.com/Go-zh/net
-  subpackages:
-  - websocket
 - package: gocv.io/x/gocv
   version: ~0.16.0
