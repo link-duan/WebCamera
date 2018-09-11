@@ -20,6 +20,7 @@ const (
 	VideoCompressQuality 	= 40
 	VideoWidth 				= 320
 	VideoHeight 			= 240
+	VideoFPS				= 30
 )
 
 type User struct {
@@ -45,10 +46,10 @@ func init() {
 	var err error
 	videoCapture, err = gocv.OpenVideoCapture("/dev/video0")
 	utils.CheckError(err)
-	videoCapture.Set(gocv.VideoCaptureFrameWidth, 200)
-	videoCapture.Set(gocv.VideoCaptureFrameWidth, 150)
+	videoCapture.Set(gocv.VideoCaptureFrameWidth, VideoWidth)
+	videoCapture.Set(gocv.VideoCaptureFrameWidth, VideoHeight)
+	videoCapture.Set(gocv.VideoCaptureFPS, VideoFPS)
 	videoCapture.Set(gocv.VideoCaptureBufferSize, 1)
-	videoCapture.Set(gocv.VideoCaptureFPS, 60)
 
 	go videoStreamLoop()
 	go writeFrameLoop()
