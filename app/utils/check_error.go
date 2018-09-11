@@ -7,3 +7,9 @@ func CheckError(err error) {
 		log.Fatal(err.Error())
 	}
 }
+
+func CheckOk(ok bool, msg string) {
+	if !ok {
+		log.Fatal(msg)
+	}
+}

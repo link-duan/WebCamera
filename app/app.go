@@ -2,17 +2,17 @@ package app
 
 import (
 	"net/http"
-	"github.com/Go-zh/net/websocket"
 	SocketServices "github.com/yaphper/WebCamera/app/websocket"
+	"golang.org/x/net/websocket"
 )
 
 func init() {
-	http.Handle("/socket/", websocket.Handler(SocketServices.VideoStreamWS))
+	http.Handle("/socket/video_stream", websocket.Handler(SocketServices.VideoStreamWS))
 
 	http.Handle("/", http.FileServer(http.Dir("app/view")))
 }
 
 func StartServer() error {
 
-	return http.ListenAndServe("0.0.0.0:9808", nil)
+	return http.ListenAndServe("127.0.0.1:9808", nil)
 }
