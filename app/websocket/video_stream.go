@@ -20,7 +20,7 @@ const (
 	VideoCompressQuality 	= 40
 	VideoWidth 				= 320
 	VideoHeight 			= 240
-	VideoFPS				= 30
+	VideoFPS				= 21
 )
 
 type User struct {

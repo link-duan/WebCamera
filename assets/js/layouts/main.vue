@@ -5,9 +5,8 @@
     </nav>
     <div id="video-screen" v-show="authed">
       <img id="frame-image" :src="frameSrc" alt="">
-      <div class="status">
-        <template v-if="online">在线 {{fps}}fps</template>
-        <template v-else>离线</template>
+      <div class="status" v-if="online&&showFps">
+        {{fps}}fps
       </div>
     </div>
 
@@ -23,10 +22,25 @@
 
     </el-form>
 
-    <div v-show="authed" class="verify-success">
-      <i class="el-icon-success"></i>
-      连接成功
-    </div>
+    <el-form v-show="authed" class="verify-success" label-position="left" label-width="80px">
+      <el-form-item label="状态">
+        <template v-if="online">
+          连接成功
+        </template>
+        <template v-else>
+          离线
+        </template>
+      </el-form-item>
+      <el-form-item label="显示FPS">
+        <el-switch
+          v-model="showFps"
+          active-color="#13ce66"
+          inactive-color="#ff4949">
+        </el-switch>
+      </el-form-item>
+
+      <el-button @click="onLogout" style="width:100%;">注销</el-button>
+    </el-form>
 
   </div>
 </template>
@@ -46,6 +60,7 @@ export default {
       fpsCounter: 0,
       lastFpsUpdatedAt: 0,
       online: false,
+      showFps: true,
       frameSrc: null
     };
   },
@@ -110,6 +125,9 @@ export default {
         })
         break;
       }
+    },
+    onLogout: function() {
+      window.location.href = "/";
     }
   },
   created: function() {
@@ -142,6 +160,8 @@ body {
   position: relative;
   #frame-image{
     width: 100vw;
+    height: 75vw;
+    background-color: #ccc;
   }
   .status {
     color: #00cc00;
@@ -159,10 +179,7 @@ body {
   margin-top: 20px;
 }
 .verify-success {
-  text-align: center;
-  margin-top: 30px;
-  font-size: 28px;
-  color: #00cc00;
+  padding: 10px;
 }
 </style>
 
