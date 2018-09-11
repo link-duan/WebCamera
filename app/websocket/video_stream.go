@@ -1,45 +1,46 @@
 package websocket
 
 import (
-	"gocv.io/x/gocv"
-	"github.com/yaphper/WebCamera/app/utils"
-	"log"
-	"image"
 	"bytes"
-	"image/jpeg"
-	"time"
-	"sync"
-	"strconv"
-	"runtime"
 	"encoding/json"
+	"image"
+	"image/jpeg"
+	"log"
+	"runtime"
+	"strconv"
 	"strings"
+	"sync"
+	"time"
+
 	"github.com/Go-zh/net/websocket"
+	"github.com/yaphper/WebCamera/app/utils"
+	"gocv.io/x/gocv"
 )
 
 const (
-	VideoCompressQuality 	= 40
-	VideoWidth 				= 320
-	VideoHeight 			= 240
-	VideoFPS				= 21
+	VideoCompressQuality = 40
+	VideoWidth           = 320
+	VideoHeight          = 240
+	VideoFPS             = 21
 )
 
 type User struct {
-	uid 			string
-	ws				*websocket.Conn
-	authenticated 	bool
+	uid           string
+	ws            *websocket.Conn
+	authenticated bool
 }
 
 var (
-	videoCapture 		*gocv.VideoCapture
-	frameBytes 			*bytes.Buffer
+	videoCapture *gocv.VideoCapture
+	frameBytes   *bytes.Buffer
 
-	frameWriteChan  	= make(chan *bytes.Buffer)
+	frameWriteChan      = make(chan *bytes.Buffer)
 	closeFrameWriteChan = make(chan int)
 
-	wsConnList 			= make(map[*User]*websocket.Conn)
-	videoFrame 			= gocv.NewMat()
+	wsConnList = make(map[*User]*websocket.Conn)
+	videoFrame = gocv.NewMat()
 
-	wsConnListLock 		sync.Mutex
+	wsConnListLock sync.Mutex
 )
 
 func init() {
@@ -57,10 +58,10 @@ func init() {
 
 func videoStreamLoop() {
 	var (
-		err error
+		err       error
 		tempImage image.Image
 
-		frameSize = image.Point{X: VideoWidth, Y: VideoHeight}
+		frameSize       = image.Point{X: VideoWidth, Y: VideoHeight}
 		compressOptions = jpeg.Options{Quality: VideoCompressQuality}
 	)
 	for {
@@ -93,7 +94,7 @@ func writeFrameLoop() {
 		select {
 		case data = <-frameWriteChan:
 			go func() {
-				for user := range wsConnList  {
+				for user := range wsConnList {
 					if user.authenticated {
 						go writeFrame(user, data.Bytes())
 					}
@@ -108,7 +109,6 @@ func writeFrameLoop() {
 	}
 
 ERR:
-
 }
 
 func writeFrame(user *User, data []byte) {
@@ -134,7 +134,7 @@ func writeFrame(user *User, data []byte) {
 	}
 }
 
-func heartbeatLoop(ws * websocket.Conn, user *User, closeChan chan int) {
+func heartbeatLoop(ws *websocket.Conn, user *User, closeChan chan int) {
 	for {
 		select {
 		case <-closeChan:
@@ -155,12 +155,13 @@ ERR:
 	wsConnListLock.Lock()
 	delete(wsConnList, user)
 	wsConnListLock.Unlock()
+	log.Printf("socket[%s] closed", ws.Request().RemoteAddr)
 }
 
 func handleReceive(dataStr string, user *User) {
 	var (
-		userName 	string
-		passWord	string
+		userName string
+		passWord string
 	)
 	data := make(map[string]interface{})
 	stringReader := strings.NewReader(dataStr)
